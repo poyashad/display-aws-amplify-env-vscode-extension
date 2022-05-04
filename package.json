@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:display-aws-amplify-environment.helloWorld"
+        "workspaceContains:**/team-provider-info.json"
 	],
 	"main": "./out/extension.js",
 	"contributes": {

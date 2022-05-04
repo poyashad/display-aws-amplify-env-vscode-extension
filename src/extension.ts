@@ -1,25 +1,65 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+"use strict";
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+import * as vscode from "vscode";
+import { posix } from "path";
+let myStatusBarItem: vscode.StatusBarItem;
+
 export function activate(context: vscode.ExtensionContext) {
-	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "display-aws-amplify-environment" is now active!');
+  const myCommandId = "sample.showSelectionCount";
+  context.subscriptions.push(
+    vscode.commands.registerCommand(myCommandId, async () => {
+      if (!vscode.workspace.workspaceFolders) {
+		vscode.window.showInformationMessage(
+			"No folder or workspace opened"
+		  );
+      } else {
+		const folderUri = vscode.workspace.workspaceFolders[0].uri;
+		const fileUri = folderUri.with({
+		  path: posix.join(
+			folderUri.path,
+			"/amplify/.config",
+			"/local-env-info.json"
+		  ),
+		});
+		const readData = await vscode.workspace.fs.readFile(fileUri);
+		const readStr = Buffer.from(readData).toString("utf8");
+		const json = JSON.parse(readStr);
+		const env = json.envName;
+		vscode.window.showInformationMessage(
+		  `Your are working in Amplify Env: ${env}`
+		);
+	  }
+      
+    })
+  );
+  myStatusBarItem = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Left,
+    100
+  );
+  myStatusBarItem.command = myCommandId;
+  context.subscriptions.push(myStatusBarItem);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('display-aws-amplify-environment.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Display AWS Amplify Environment!');
-	});
+  updateStatusBarItem();
+}
 
-	context.subscriptions.push(disposable);
+async function updateStatusBarItem(): Promise<void> {
+  if (!vscode.workspace.workspaceFolders) {
+    myStatusBarItem.hide();
+  } else {
+    const folderUri = vscode.workspace.workspaceFolders[0].uri;
+    const fileUri = folderUri.with({
+      path: posix.join(
+        folderUri.path,
+        "/amplify/.config",
+        "/local-env-info.json"
+      ),
+    });
+    const readData = await vscode.workspace.fs.readFile(fileUri);
+    const readStr = Buffer.from(readData).toString("utf8");
+    const json = JSON.parse(readStr);
+    myStatusBarItem.text = `$(split-vertical) Amplify Env: ${json.envName}`;
+    myStatusBarItem.show();
+  }
 }
 
 // this method is called when your extension is deactivated
