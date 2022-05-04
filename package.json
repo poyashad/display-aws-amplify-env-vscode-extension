@@ -2,6 +2,7 @@
   "name": "display-aws-amplify-environment",
 	"displayName": "Display AWS Amplify Environment",
 	"description": "This extension displays the AWS Amplify environment. It makes it easy for you to see which environment you are currently working in",
+	"publisher": "poyashad",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.66.0"
