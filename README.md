@@ -14,5 +14,6 @@ The extension looks for changes in this file and displays the env name from this
 
 This extension displays the current Amplify Env name in the status bar of VS code. When you change the Amplify environment, this extension also notifies you with an informational message.
 
-![statusBar](./images/statusbar.png) ![message](./images/message.png)
+![listing](./images//listingView.png)
+![statusBar](./images/statusbar.png) ![message](./images/message.png) 
 
