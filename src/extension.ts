@@ -144,7 +144,7 @@ async function getTeamProviderEnvironments(
 }
 
 async function updateStatusBarItem(env: String): Promise<void> {
-  myStatusBarItem.text = `$(split-vertical) Amplify Environment: ${env}`;
+  myStatusBarItem.text = `$(aws-amplify) Amplify Environment: ${env}`;
   myStatusBarItem.show();
 }
 

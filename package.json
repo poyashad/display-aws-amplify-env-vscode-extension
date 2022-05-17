@@ -1,6 +1,6 @@
 {
   "name": "display-aws-amplify-environment",
-  "displayName": "Display AWS Amplify Environment",
+  "displayName": "AWS Amplify Extension",
   "description": "This extension displays the AWS Amplify environment in the Status Bar",
   "publisher": "poyashad",
   "icon": "images/icon.png",
@@ -25,7 +25,16 @@
         "command": "display-aws-amplify-environment.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "icons": {
+      "aws-amplify": {
+          "description": "AWS Amplify Icon",
+          "default": {
+              "fontPath": "./aws-amplify.woff",
+              "fontCharacter": "A"
+          }
+      }
+  }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
