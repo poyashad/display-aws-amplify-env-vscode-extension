@@ -18,4 +18,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - Removed Code Duplication
-  
+
+## [1.0.0] - 2022-05-23
+
+### Added
+
+- Amplify Icon in the status bar
+- Progress Notification when changing environment
+- Child process when changing environment
+- Ability to add a new env from the extension
+
+### Changed
+
+- The Logo for the VS Code extension
+- Changed the name from Display AWS Amplify Environment to AWS Amplify Enironment

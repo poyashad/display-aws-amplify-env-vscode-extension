@@ -1,10 +1,10 @@
 {
   "name": "display-aws-amplify-environment",
-  "displayName": "AWS Amplify Extension",
+  "displayName": "AWS Amplify Environments",
   "description": "This extension displays the AWS Amplify environment in the Status Bar",
   "publisher": "poyashad",
   "icon": "images/icon.png",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.66.0"
   },

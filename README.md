@@ -1,6 +1,6 @@
-# Display Current AWS Amplify Environment
+# AWS Amplify Environments
 
-This extension displays the AWS Amplify environment. It makes it easy for you to see which environment you are currently working in.
+This extension displays the current name of the local Amplify environment in the status bar of VS code. If you click on the extension in the status bar, you can change the environment graphically. This extension also notifies you with an information message when you change the environment.
 
 ## Setup
 
@@ -12,8 +12,4 @@ The extension looks for changes in this file and displays the env name from this
 
 ## Use
 
-This extension displays the current Amplify Env name in the status bar of VS code. When you change the Amplify environment, this extension also notifies you with an informational message.
-
-![listing](./images//listingView.png)
-![statusBar](./images/statusbar.png) ![message](./images/message.png) 
-
+![demo1](./images/demo1.gif)
