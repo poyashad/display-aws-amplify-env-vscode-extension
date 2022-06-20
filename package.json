@@ -4,7 +4,7 @@
   "description": "This extension displays the AWS Amplify environment in the Status Bar",
   "publisher": "poyashad",
   "icon": "images/icon.png",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.66.0"
   },
@@ -16,7 +16,7 @@
     "Other"
   ],
   "activationEvents": [
-    "workspaceContains:**/team-provider-info.json"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {

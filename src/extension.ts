@@ -11,7 +11,28 @@ export async function activate(context: vscode.ExtensionContext) {
   if (!vscode.workspace.workspaceFolders) {
     vscode.window.showInformationMessage("No folder or workspace opened");
   } else {
-    // Get local file paths
+    vscode.workspace.findFiles("**/team-provider-info.json").then((result) => {
+      if (result.length > 0) {
+        console.log("Found Amplify Project");
+        initExtension(context);
+      } else {
+        console.log("Looking for Amplify Project");
+        context.subscriptions.push(
+          vscode.workspace
+            .createFileSystemWatcher("**/team-provider-info.json")
+            .onDidCreate(async (file) => {
+              console.log("Found Team Provider File - Activating Extension");
+              activate(context);
+            })
+        );
+      }
+    });
+  }
+}
+
+async function initExtension(context: vscode.ExtensionContext) {
+  // Get local file paths
+  if (vscode.workspace.workspaceFolders) {
     const folderUri = vscode.workspace.workspaceFolders[0].uri;
     const localEnvFileUri = folderUri.with({
       path: posix.join(
@@ -61,7 +82,6 @@ export async function activate(context: vscode.ExtensionContext) {
     );
   }
 }
-
 async function getLocalEnv(localEnvFileUri: any): Promise<string> {
   const readData = await vscode.workspace.fs.readFile(localEnvFileUri);
   const readStr = Buffer.from(readData).toString("utf8");
@@ -219,7 +239,9 @@ async function createNewAmplifyEnv(options: any) {
     )
   ) {
     console.log(newEnv, " Already Exists");
-    vscode.window.showInformationMessage(`The ${newEnv} environment exists already`);
+    vscode.window.showInformationMessage(
+      `The ${newEnv} environment exists already`
+    );
   } else {
     console.log("Create New Env ", newEnv);
     if (vscode.window.activeTerminal?.name !== "Amplify Extension Terminal") {

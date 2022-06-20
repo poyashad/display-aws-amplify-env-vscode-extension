@@ -32,3 +32,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - The Logo for the VS Code extension
 - Changed the name from Display AWS Amplify Environment to AWS Amplify Enironment
+
+## [1.0.1] - 2022-06-20
+
+### Fixed
+
+- the extension activation event was an event that looked for a ``team-provider-info.json`` file in the workspace at startup and if not found the extension would not activate. With this fix. The file system watcher detects the creation of the ``team-provider-info.json`` file and activates the extension.
