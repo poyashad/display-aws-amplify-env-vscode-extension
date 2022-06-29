@@ -38,3 +38,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 
 - the extension activation event was an event that looked for a ``team-provider-info.json`` file in the workspace at startup and if not found the extension would not activate. With this fix. The file system watcher detects the creation of the ``team-provider-info.json`` file and activates the extension.
+
+## [1.0.2] - 2022-06-29
+
+### Fixed
+
+- The extension was not detecting the creation of the ``team-provider-info.json`` file.
+
+### Removed
+
+- Removed the tooltip for now (Don't know what to use it for right now, will figure it out)

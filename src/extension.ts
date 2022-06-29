@@ -15,6 +15,13 @@ export async function activate(context: vscode.ExtensionContext) {
       if (result.length > 0) {
         console.log("Found Amplify Project");
         initExtension(context);
+        vscode.workspace
+        .createFileSystemWatcher("**/team-provider-info.json")
+        .onDidDelete(async (file) => {
+          console.log("Amplify Project Deleted");
+          deactivateExtension();
+        });
+       
       } else {
         console.log("Looking for Amplify Project");
         context.subscriptions.push(
@@ -29,9 +36,14 @@ export async function activate(context: vscode.ExtensionContext) {
     });
   }
 }
+async function deactivateExtension() {
+  console.log("Deactivating Extension");
+  myStatusBarItem.hide();
+  vscode.window.showInformationMessage("Amplify Project Deleted");
+}
 
 async function initExtension(context: vscode.ExtensionContext) {
-  // Get local file paths
+  // Get local file paths for Amplify Project Files
   if (vscode.workspace.workspaceFolders) {
     const folderUri = vscode.workspace.workspaceFolders[0].uri;
     const localEnvFileUri = folderUri.with({
@@ -52,7 +64,7 @@ async function initExtension(context: vscode.ExtensionContext) {
       100
     );
     myStatusBarItem.command = myCommandId;
-    myStatusBarItem.tooltip = "Testing Hover";
+    // myStatusBarItem.tooltip = "Testing Hover";
     context.subscriptions.push(myStatusBarItem);
     updateStatusBarItem(await getLocalEnv(localEnvFileUri));
 
